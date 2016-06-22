@@ -4,7 +4,7 @@ import telebot
 
 bot = telebot.TeleBot(config.token)
 
-def sh_word(word):
+def shm_word(word):
     is_first_capital = word[0].isupper()
     word = word.lower()
     vowels = ['а','о','у','ы','е','э','я','и','ю', 'ё']
@@ -18,8 +18,8 @@ def sh_word(word):
         word = word.title()
     return word
 
-def sh_text(text):
-    return ' '.join(filter(None, map(sh_word, text.split())))
+def shm_text(text):
+    return ' '.join(filter(None, map(shm_word, text.split())))
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
@@ -31,7 +31,7 @@ def send_help(message):
 
 @bot.message_handler(content_types=["text"])
 def sh_message(message): # Название функции не играет никакой роли, в принципе
-    bot.send_message(message.chat.id, sh_text(message.text))
+    bot.send_message(message.chat.id, shm_text(message.text))
 
 if __name__ == '__main__':
     bot.polling(none_stop=True)
